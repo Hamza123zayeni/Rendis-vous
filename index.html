@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocCare - Rendez-vous Médecin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8faff, #e3eeff);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            animation: fadeIn 1s ease-in;
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            background: #ffffff;
+            backdrop-filter: blur(8px);
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(59, 130, 246, 0.15);
+            padding: 40px;
+            width: 95%;
+            height: 95vh;
+            max-width: 1200px;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+            border: 1px solid #dbeafe;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8, #3b82f6);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(360deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #3b82f6;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(59,130,246,0.1);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .hero-section {
+            margin-bottom: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heading-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            padding: 0 20px;
+        }
+
+        .sub-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            max-width: 700px;
+            padding: 0 20px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 16px 36px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+
+        .feature-card {
+            background: #f9fbff;
+            padding: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #3b82f6;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+                height: 95vh;
+                width: 95%;
+            }
+
+            .heading-text {
+                font-size: 1.8rem;
+            }
+
+            .sub-text {
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .logo-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-link {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heading-text {
+                font-size: 1.5rem;
+            }
+
+            .sub-text {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon"><img src="logo.png" alt="Stylized medical cross and stethoscope forming a modern healthcare logo with a calm and professional tone, no visible text, set against a clean white background"></div>
+                <span>RDVFLASH</span>
+            </div>
+            <div class="nav-links">
+                <a href="login.php" class="nav-link">CONNEXION</a>
+                <a href="signup.php" class="nav-link">INSCRIPTION</a>
+            </div>
+        </nav>
+
+        <div class="hero-section">
+            <h1 class="heading-text">Dites adieu aux traces et aux retards dans les soins de santé !</h1>
+            <p class="sub-text">
+                Vous ne vous sentez pas bien aujourd'hui ? Ne vous laissez pas décourager !
+                Trouvez et contactez facilement le médecin qui vous convient en ligne, en quelques clics.
+                Prenez rendez-vous à votre convenance, évitez les files d'attente et les retards inutiles.
+            </p>
+            <a href="login.php" class="cta-button">RDVFLASH</a>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Rapide & Facile</h3>
+                <p class="feature-text">Prenez rendez-vous en quelques clics, sans complications ni délais.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍⚕️</div>
+                <h3 class="feature-title">Médecins Qualifiés</h3>
+                <p class="feature-text">Accédez à un réseau de professionnels de santé expérimentés et certifiés.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🆓</div>
+                <h3 class="feature-title">Service Gratuit</h3>
+                <p class="feature-text">Profitez de notre plateforme de réservation sans frais cachés.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
