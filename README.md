@@ -1,6 +1,6 @@
-# Rendis-vous -- Application de Gestion des Rendez‑Vous Médicaux
+# RDVFLASH_Doctor -- Application de Gestion des Rendez‑Vous Médicaux
 
-Rendis-vous est une application web permettant la gestion complète des
+RDVFLASH_Doctor est une application web permettant la gestion complète des
 rendez-vous médicaux.\
 Elle inclut trois interfaces principales : **patient**, **docteur** et
 **secrétaire**, offrant un système fluide pour planifier, visualiser et
